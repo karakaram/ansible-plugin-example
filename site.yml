@@ -1,0 +1,40 @@
+- hosts: localhost
+  connection: local
+  vars:
+    ec2_addresses: "{{ lookup('ec2_addresses') }}"
+  tasks:
+  - name: "use list return option and iterate as a loop"
+    debug: msg="{% for address in ec2_addresses %}{{ address }} {% endfor %}"
+
+#- hosts: localhost
+#  connection: local
+#  vars:
+#    ec2_addresses: "{{ lookup('ec2_addresses', region='ap-northeast-1') }}"
+#  tasks:
+#  - name: "use list return option and iterate as a loop"
+#    debug: msg="{% for address in ec2_addresses %}{{ address }} {% endfor %}"
+#
+#- hosts: localhost
+#  connection: local
+#  tasks:
+#  - name: "use list return option and iterate as a loop"
+#    debug: msg="{{ item }}"
+#    with_ec2_addresses:
+#      - { region: "ap-northeast-1" }
+
+#- hosts: localhost
+#  connection: local
+#  tasks:
+#  - name: "use list return option and iterate as a loop"
+#    debug: msg="{{ item }}"
+#    with_aws_service_ip_ranges:
+#      - region: ap-southeast-1
+
+#- hosts: localhost
+#  connection: local
+#  vars:
+#    ec2_ranges: "{{ lookup('aws_service_ip_ranges', region='ap-northeast-1', service='EC2', wantlist=True) }}"
+#  tasks:
+#
+#  - name: "use list return option and iterate as a loop"
+#    debug: msg="{% for cidr in ec2_ranges %}{{ cidr }} {% endfor %}"
